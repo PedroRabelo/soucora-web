@@ -1,24 +1,16 @@
-import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { CalendarIcon, ChartBarIcon, FolderIcon, HomeIcon, InboxIcon, UsersIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { XMarkIcon } from '@heroicons/react/24/outline'
+import { Fragment, useEffect, useState } from 'react'
 import { Logo } from './Logo'
-import clsx from 'clsx'
-
-const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
-]
+import { MenuNavigation } from './MenuNavigation'
 
 type Props = {
   openSidebar: boolean;
   handleCloseSidebar: () => void;
+  currentMenu: string;
 }
 
-export function Sidebar({ openSidebar, handleCloseSidebar }: Props) {
+export function Sidebar({ openSidebar, handleCloseSidebar, currentMenu }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
@@ -81,29 +73,7 @@ export function Sidebar({ openSidebar, handleCloseSidebar }: Props) {
                   <div className="flex flex-shrink-0 items-center px-4">
                     <Logo className='h-10 w-auto' />
                   </div>
-                  <nav className="mt-5 space-y-1 px-2">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={clsx(
-                          item.current
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                          'group flex items-center px-2 py-2 text-base font-medium rounded-md'
-                        )}
-                      >
-                        <item.icon
-                          className={clsx(
-                            item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                            'mr-4 flex-shrink-0 h-6 w-6'
-                          )}
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </a>
-                    ))}
-                  </nav>
+                  <MenuNavigation current={currentMenu} />
                 </div>
                 <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
                   <a href="#" className="group block flex-shrink-0">
@@ -133,27 +103,7 @@ export function Sidebar({ openSidebar, handleCloseSidebar }: Props) {
             <div className="flex flex-shrink-0 items-center px-4">
               <Logo className='h-8 w-auto' />
             </div>
-            <nav className="mt-5 flex-1 space-y-1 bg-white px-2">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={clsx(
-                    item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                    'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
-                  )}
-                >
-                  <item.icon
-                    className={clsx(
-                      item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                      'mr-3 flex-shrink-0 h-6 w-6'
-                    )}
-                    aria-hidden="true"
-                  />
-                  {item.name}
-                </a>
-              ))}
-            </nav>
+            <MenuNavigation current={currentMenu} />
           </div>
           <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
             <a href="#" className="group block w-full flex-shrink-0">

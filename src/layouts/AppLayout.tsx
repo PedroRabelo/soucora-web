@@ -21,7 +21,11 @@ export function AppLayout({ pageTitle, children, headTitle, description, keyword
     <>
       <PageHead title={headTitle} description={description} keywords={keywords} />
       <div>
-        <Sidebar openSidebar={sidebarOpen} handleCloseSidebar={() => setSidebarOpen(false)} />
+        <Sidebar
+          openSidebar={sidebarOpen}
+          handleCloseSidebar={() => setSidebarOpen(false)}
+          currentMenu='Dashboard'
+        />
 
         <div className="flex flex-1 flex-col md:pl-64">
           <div className="sticky top-0 z-10 bg-gray-100 pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden">
